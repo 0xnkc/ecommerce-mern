@@ -1,5 +1,4 @@
 const express =require("express")
-const { model } = require("../model/user")
 const router =express.Router()
 
 
