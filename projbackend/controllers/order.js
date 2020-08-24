@@ -1,4 +1,5 @@
 const {Order,ProducCart} =require("../model/order")
+const order = require("../model/order")
 
 exports.createOrder =(req,res)=>{
     req.body.order.user =req.profile
@@ -37,4 +38,24 @@ exports.getAllOrders =(req,res)=>{
         }
         res.json(order)
     })
+}
+
+exports.getOrderSatus =(req,res)=>{
+    res.json(Order.schema.path("status").enumValues)
+}
+
+exports.updateStatus =(req,res)=>{
+    Order.update(
+        {_id:req.body.orderId},
+        {$set:{status:req.body.status}},
+        (err,order)=>{
+            if(err){
+                return res.status(400).json({
+                    error:"Can not uodate order status"
+                })
+            }
+            res.json(order);
+        }
+
+        )
 }

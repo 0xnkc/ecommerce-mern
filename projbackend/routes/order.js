@@ -13,9 +13,11 @@ const {
     updateStock
 } = require("../controllers/product")
 const {
-    getOrderById,
-    createOrder,
-    getAllOrders
+  getOrderById,
+  createOrder,
+  getAllOrders,
+  getOrderSatus,
+  updateStatus,
 } = require("../controllers/order");
 const {
     models
@@ -33,4 +35,9 @@ router.post("order/create/:userId", isSignedIn, isAuthenticated, pushOrderInPurc
 
 //read
 router.get("/order/all/:userId",isSignedIn,isAuthenticated,isAdmin,getAllOrders);
+
+//satus routes
+router.get("/order/status/:userId",isSignedIn,isAuthenticated,isAdmin,getOrderSatus)
+router.put("/order/:orderId/status/:userId",isSignedIn,isAuthenticated,isAdmin,updateStatus)
+
 module.exports = router;
